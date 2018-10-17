@@ -3,11 +3,11 @@ import { storiesOf } from '@storybook/react'
 import { Avatar, Link, Message, PreviewCard } from '../../src/index.js'
 import { ScopeProvider } from '../../src/components/styled'
 
-export { default as defaultStories } from './default'
-export { default as chatStories } from './chat'
-export { default as attachmentStories } from './attachment'
-export { default as embedStories } from './embed'
-export { default as mediaStories } from './media'
+import './default'
+import './chat'
+import './attachment'
+import './embed'
+import './media'
 
 const stories = storiesOf('Message', module)
 

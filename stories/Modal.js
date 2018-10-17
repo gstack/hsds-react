@@ -3,7 +3,6 @@ import PropTypes from 'prop-types'
 import { storiesOf } from '@storybook/react'
 import {
   Button,
-  EmojiPicker,
   FormLabel,
   Heading,
   Modal,
@@ -237,14 +236,6 @@ stories.add('custom close trigger', () => {
     </Modal>
   )
 })
-
-stories.add('seamless', () => (
-  <Modal trigger={<Link>Clicky</Link>} seamless isOpen>
-    <Modal.Content>
-      <EmojiPicker />
-    </Modal.Content>
-  </Modal>
-))
 
 stories.add('nested', () => (
   <Modal trigger={<Link>Clicky</Link>}>

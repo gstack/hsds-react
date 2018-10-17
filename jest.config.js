@@ -22,6 +22,7 @@ module.exports = {
     '!src/components/Animate/animations/**/*.js',
   ],
   coverageDirectory: 'coverage/',
+  setupTestFrameworkScriptFile: '<rootDir>/config/setupTests.js',
   setupFiles: [
     '<rootDir>/config/polyfills.js',
     '<rootDir>/config/jsdomPolyfills.js',
