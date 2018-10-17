@@ -64,7 +64,7 @@ describe('Scrollable', () => {
 
   test('Can pass scrollableRef to parent', () => {
     const wrapper = mount(<MyComponent />)
-    const n = wrapper.find('.c-Scrollable__content').getNode()
+    const n = wrapper.find('.c-Scrollable__content').instance()
     const o = wrapper.instance()
 
     expect(o.scrollable).toBe(n)
@@ -75,7 +75,7 @@ describe('Scrollable', () => {
     const wrapper = mount(<MyComponent onScroll={spy} />)
     const o = wrapper.find(Scrollable)
 
-    o.getNode().props.onScroll()
+    o.instance().props.onScroll()
 
     expect(spy).toHaveBeenCalled()
   })

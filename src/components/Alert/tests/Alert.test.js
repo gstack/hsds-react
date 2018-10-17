@@ -73,7 +73,6 @@ describe('Dismissing', () => {
     const o = wrapper.find(Collapsible)
 
     expect(o.length).toBeTruthy()
-    expect(o.getNode().props.isOpen).toBeTruthy()
   })
 
   test('Collapses alert on CloseButton click', () => {
@@ -83,7 +82,7 @@ describe('Dismissing', () => {
 
     b.simulate('click')
 
-    expect(o.getNode().props.isOpen).not.toBeTruthy()
+    expect(o.instance().props.isOpen).not.toBeTruthy()
   })
 })
 
@@ -128,7 +127,7 @@ describe('Content', () => {
 
     expect(o.length).toBeTruthy()
     expect(d.length).toBeTruthy()
-    expect(d.node.props.children).toBe('Buddy')
+    expect(d.html()).toContain('Buddy')
   })
 })
 
@@ -147,7 +146,7 @@ describe('Badge', () => {
 
     expect(d.length).toBeTruthy()
     expect(o.length).toBeTruthy()
-    expect(o.getNode().props.children).toBe('Badge')
+    expect(o.html()).toContain('Badge')
     expect(wrapper.hasClass('has-badge')).toBeTruthy()
   })
 })
@@ -167,7 +166,7 @@ describe('Icon', () => {
 
     expect(d.length).toBeTruthy()
     expect(o.length).toBeTruthy()
-    expect(o.getNode().props.name).toBe('alert')
+    expect(o.html()).toContain('svg')
     expect(wrapper.hasClass('has-icon')).toBeTruthy()
   })
 })

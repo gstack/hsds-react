@@ -117,7 +117,7 @@ describe('Ref', () => {
   test('Can retrieve the input node from inputRef', () => {
     const spy = jest.fn()
     const wrapper = mount(<RadioCard inputRef={spy} />)
-    const o = wrapper.find('input').getNode()
+    const o = wrapper.find('input').instance()
 
     expect(spy).toHaveBeenCalledWith(o)
   })

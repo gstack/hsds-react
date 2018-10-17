@@ -142,7 +142,7 @@ describe('Events', () => {
     const wrapper = mount(<Input multiline={true} onResize={spy} />)
     const resizer = wrapper.find('Resizer')
 
-    resizer.getNode().handleOnResize()
+    resizer.instance().handleOnResize()
 
     expect(spy).toHaveBeenCalled()
   })
@@ -211,7 +211,7 @@ describe('ID', () => {
 describe('Multiline', () => {
   test('Default selector is an input', () => {
     const wrapper = mount(<Input />)
-    const o = wrapper.find(ui.field).getNode()
+    const o = wrapper.find(ui.field).instance()
 
     expect(o.tagName.toLowerCase()).toBe('input')
     expect(o.type).toBe('text')
@@ -219,14 +219,14 @@ describe('Multiline', () => {
 
   test('Selector becomes a textarea if multiline is defined', () => {
     const wrapper = mount(<Input multiline />)
-    const o = wrapper.find(ui.field).getNode()
+    const o = wrapper.find(ui.field).instance()
 
     expect(o.type).toBe('textarea')
   })
 
   test('Accepts number argument', () => {
     const wrapper = mount(<Input multiline={5} />)
-    const o = wrapper.find(ui.field).getNode()
+    const o = wrapper.find(ui.field).instance()
 
     expect(o.type).toBe('textarea')
   })
@@ -295,7 +295,7 @@ describe('Multiline', () => {
     const spy = jest.fn()
     const wrapper = mount(<Input multiline={3} maxHeight="50vh" />)
     const o = wrapper.find(ui.field)
-    o.getNode().onfocus = spy
+    o.instance().onfocus = spy
 
     wrapper.instance().handleExpandingResize()
 
@@ -498,14 +498,14 @@ describe('inputNode', () => {
   test('Sets inputNode on mount', () => {
     const wrapper = mount(<Input />)
 
-    expect(wrapper.getNode().inputNode).toBeTruthy()
+    expect(wrapper.instance().inputNode).toBeTruthy()
   })
 
   test('Unsets inputNode on unmount', () => {
     const wrapper = mount(<Input />)
     wrapper.unmount()
 
-    expect(wrapper.getNode().inputNode).not.toBeTruthy()
+    expect(wrapper.instance().inputNode).not.toBeTruthy()
   })
 })
 
@@ -513,7 +513,7 @@ describe('isFocused', () => {
   test('Can focus input using isFocused prop', () => {
     const spy = jest.fn()
     const wrapper = mount(<Input isFocused />)
-    const o = wrapper.getNode().inputNode
+    const o = wrapper.instance().inputNode
     o.onfocus = spy
 
     jest.runOnlyPendingTimers()
@@ -524,7 +524,7 @@ describe('isFocused', () => {
   test('Can focus input using custom timeout', () => {
     const spy = jest.fn()
     const wrapper = mount(<Input isFocused forceAutoFocusTimeout={20} />)
-    const o = wrapper.getNode().inputNode
+    const o = wrapper.instance().inputNode
     o.onfocus = spy
 
     jest.runOnlyPendingTimers()
@@ -537,7 +537,7 @@ describe('isFocused', () => {
     const wrapper = mount(
       <Input onFocus={spy} isFocused={false} forceAutoFocusTimeout={20} />
     )
-    const o = wrapper.getNode().inputNode
+    const o = wrapper.instance().inputNode
     o.onfocus = spy
 
     wrapper.setProps({ isFocused: true })
@@ -552,7 +552,7 @@ describe('moveCursorToEnd', () => {
   test('Moves the selection cursor to end of value', () => {
     const wrapper = mount(<Input value="WEE" moveCursorToEnd />)
     wrapper.setState({ value: 'WEE' })
-    wrapper.getNode().moveCursorToEnd()
+    wrapper.instance().moveCursorToEnd()
   })
 })
 

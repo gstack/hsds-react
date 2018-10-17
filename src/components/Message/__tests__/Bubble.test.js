@@ -68,8 +68,8 @@ describe('Content', () => {
     const o = wrapper.find(Text)
 
     expect(o.length).toBe(1)
-    expect(o.getNode().props.wordWrap).toBeTruthy()
-    expect(o.getNode().props.children).toBe('Mugatu')
+    expect(o.instance().props.wordWrap).toBeTruthy()
+    expect(o.instance().props.children).toBe('Mugatu')
   })
 
   test('Span-based content is contained with a wordWrapped Text component', () => {

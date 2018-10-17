@@ -108,7 +108,7 @@ describe('Events', () => {
     const wrapper = mount(<Body onOpen={spy} uuid="body001" />)
     const comp = wrapper.find(Collapsible)
 
-    comp.getNode().props.onOpen()
+    comp.instance().props.onOpen()
 
     expect(spy).toHaveBeenCalledWith('body001')
   })
@@ -118,7 +118,7 @@ describe('Events', () => {
     const wrapper = mount(<Body onClose={spy} uuid="body001" />)
     const comp = wrapper.find(Collapsible)
 
-    comp.getNode().props.onClose()
+    comp.instance().props.onClose()
 
     expect(spy).toHaveBeenCalledWith('body001')
   })

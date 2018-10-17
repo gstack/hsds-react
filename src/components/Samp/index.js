@@ -1,7 +1,5 @@
 import React from 'react'
-import { default as Text, propTypes as textPropTypes } from '../Text'
-
-export const propTypes = textPropTypes
+import Text from '../Text'
 
 const Samp = props => {
   const { children } = props
@@ -12,7 +10,5 @@ const Samp = props => {
     </Text>
   )
 }
-
-Samp.propTypes = propTypes
 
 export default Samp

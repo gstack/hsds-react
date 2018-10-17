@@ -48,7 +48,7 @@ describe('Manager', () => {
       </Manager>
     )
     const man = wrapper.find(Manager)
-    const el = wrapper.find('span').getNode()
+    const el = wrapper.find('span').instance()
 
     expect(man.node.state.context.referenceNode).toBe(el)
   })

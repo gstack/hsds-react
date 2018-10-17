@@ -60,7 +60,7 @@ describe('Chat', () => {
         to
       />
     )
-    const props = wrapper.find(Chat).getNode().props
+    const props = wrapper.find(Chat).instance().props
 
     expect(props.from).toBeTruthy()
     expect(props.isNote).toBeTruthy()

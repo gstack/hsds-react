@@ -86,7 +86,7 @@ describe('onRemove', () => {
     )
     const o = wrapper.find(Tag).first()
 
-    o.getNode().wrappedInstance.handleOnRemove()
+    o.instance().wrappedInstance.handleOnRemove()
 
     jest.runOnlyPendingTimers()
 

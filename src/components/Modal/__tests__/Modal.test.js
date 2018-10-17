@@ -161,7 +161,7 @@ describe('Route', () => {
       { attachTo: testBody }
     )
 
-    wrapper.getNode().history.goBack()
+    wrapper.instance().history.goBack()
     const modal = global.document.getElementsByClassName('c-Modal')[0]
 
     expect(modal).toBeTruthy()
@@ -630,7 +630,7 @@ describe('Keyboard: Tab', () => {
         <button className="three">three</button>
       </ModalComponent>
     )
-    const o = wrapper.find('.three').getNode()
+    const o = wrapper.find('.three').instance()
 
     wrapper.instance().handleOnTab({
       target: o,
@@ -649,7 +649,7 @@ describe('Keyboard: Tab', () => {
         <button className="three">three</button>
       </ModalComponent>
     )
-    const o = wrapper.find('.two').getNode()
+    const o = wrapper.find('.two').instance()
 
     wrapper.instance().handleOnTab({
       target: o,
@@ -678,7 +678,7 @@ describe('Keyboard: Tab', () => {
         <button className="three">three</button>
       </ModalComponent>
     )
-    const o = wrapper.find('.c-CloseButton').getNode()
+    const o = wrapper.find('.c-CloseButton').instance()
 
     wrapper.instance().handleOnShiftTab({
       target: o,
@@ -697,7 +697,7 @@ describe('Keyboard: Tab', () => {
         <button className="three">three</button>
       </ModalComponent>
     )
-    const o = wrapper.find('.two').getNode()
+    const o = wrapper.find('.two').instance()
 
     wrapper.instance().handleOnShiftTab({
       target: o,

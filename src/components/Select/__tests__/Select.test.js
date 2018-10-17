@@ -422,14 +422,14 @@ describe('selectNode', () => {
   test('Sets selectNode on mount', () => {
     const wrapper = mount(<Select />)
 
-    expect(wrapper.getNode().selectNode).toBeTruthy()
+    expect(wrapper.instance().selectNode).toBeTruthy()
   })
 
   test('Unsets selectNode on unmount', () => {
     const wrapper = mount(<Select />)
     wrapper.unmount()
 
-    expect(wrapper.getNode().selectNode).not.toBeTruthy()
+    expect(wrapper.instance().selectNode).not.toBeTruthy()
   })
 })
 
@@ -437,7 +437,7 @@ describe('isFocused', () => {
   test('Can focus select using isFocused prop', () => {
     const spy = jest.fn()
     const wrapper = mount(<Select isFocused />)
-    const o = wrapper.getNode().selectNode
+    const o = wrapper.instance().selectNode
     o.onfocus = spy
 
     jest.runOnlyPendingTimers()
@@ -448,7 +448,7 @@ describe('isFocused', () => {
   test('Can focus select using custom timeout', () => {
     const spy = jest.fn()
     const wrapper = mount(<Select isFocused forceAutoFocusTimeout={20} />)
-    const o = wrapper.getNode().selectNode
+    const o = wrapper.instance().selectNode
     o.onfocus = spy
 
     expect(spy).not.toHaveBeenCalled()
@@ -463,7 +463,7 @@ describe('isFocused', () => {
     const wrapper = mount(
       <Select onFocus={spy} isFocused={false} forceAutoFocusTimeout={20} />
     )
-    const o = wrapper.getNode().selectNode
+    const o = wrapper.instance().selectNode
     o.onfocus = spy
 
     wrapper.setProps({ isFocused: true })

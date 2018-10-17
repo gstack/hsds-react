@@ -50,7 +50,7 @@ describe('Content', () => {
     const o = wrapper.find(`.${cx}__block`)
 
     expect(o.length).toBeTruthy()
-    expect(o.getNode().innerHTML).toContain('Mugatu')
+    expect(o.instance().innerHTML).toContain('Mugatu')
   })
 
   test('Enhances Action child component', () => {

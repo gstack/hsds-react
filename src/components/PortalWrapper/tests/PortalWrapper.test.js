@@ -96,8 +96,8 @@ describe('Manager', () => {
 
     const o = wrapper.find(TestComponent).last()
 
-    o.getNode().closePortal()
-    expect(o.getNode().state.isOpen).toBe(false)
+    o.instance().closePortal()
+    expect(o.instance().state.isOpen).toBe(false)
   })
 
   test('Cannot close Component that is not last in Manage list', () => {
@@ -111,8 +111,8 @@ describe('Manager', () => {
     )
     const o = wrapper.find(TestComponent).first()
 
-    o.getNode().closePortal()
-    expect(o.getNode().state.isOpen).toBe(true)
+    o.instance().closePortal()
+    expect(o.instance().state.isOpen).toBe(true)
   })
 })
 
@@ -240,7 +240,7 @@ describe('Trigger', () => {
     const TestComponent = PortalWrapper(options)(TestButton)
     const trigger = <button>Trigger</button>
     const wrapper = mount(<TestComponent timeout={0} trigger={trigger} />)
-    const o = wrapper.getNode()
+    const o = wrapper.instance()
 
     expect(o.triggerComponent).toBeTruthy()
     expect(o.triggerNode).toBeTruthy()
@@ -250,7 +250,7 @@ describe('Trigger', () => {
     const TestComponent = PortalWrapper(options)(TestButton)
     const trigger = <button>Trigger</button>
     const wrapper = mount(<TestComponent timeout={0} trigger={trigger} />)
-    const o = wrapper.getNode()
+    const o = wrapper.instance()
 
     wrapper.unmount()
 
@@ -263,7 +263,7 @@ describe('Trigger', () => {
     const trigger = <button>Trigger</button>
     const wrapper = mount(<TestComponent timeout={0} trigger={trigger} />)
     const o = wrapper.find('button')
-    o.getNode().onfocus = spy
+    o.instance().onfocus = spy
     wrapper.setProps({ isOpen: false })
 
     expect(spy).not.toHaveBeenCalled()
@@ -277,7 +277,7 @@ describe('Trigger', () => {
       <TestComponent timeout={0} trigger={trigger} isOpen />
     )
     const o = wrapper.find('button')
-    o.getNode().onfocus = spy
+    o.instance().onfocus = spy
     wrapper.setProps({ isOpen: false })
 
     expect(spy).toHaveBeenCalled()

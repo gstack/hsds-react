@@ -24,3 +24,5 @@ export type {
   PopperArrowProps,
   PopperProps,
 }
+
+export default Popper

@@ -187,7 +187,7 @@ describe('ChoiceGroup', () => {
       )
       const o = wrapper.find(ChoiceGroup)
 
-      expect(o.getNode().multiSelect).toBeFalsy()
+      expect(o.instance().multiSelect).toBeFalsy()
     })
 
     test('Does auto-multiSelect for Checkbox children', () => {
@@ -200,7 +200,7 @@ describe('ChoiceGroup', () => {
       )
       const o = wrapper.find(ChoiceGroup)
 
-      expect(o.getNode().multiSelect).toBeTruthy()
+      expect(o.instance().multiSelect).toBeTruthy()
     })
 
     test('Can disable multiSelect for Checbox children, if defined', () => {
@@ -213,7 +213,7 @@ describe('ChoiceGroup', () => {
       )
       const o = wrapper.find(ChoiceGroup)
 
-      expect(o.getNode().multiSelect).not.toBeTruthy()
+      expect(o.instance().multiSelect).not.toBeTruthy()
     })
   })
 

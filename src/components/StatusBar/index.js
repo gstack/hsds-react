@@ -1,6 +1,6 @@
 import React, { PureComponent as Component } from 'react'
 import PropTypes from 'prop-types'
-import { default as Collapsible, collapsibleTypes } from '../Collapsible'
+import Collapsible from '../Collapsible'
 import Centralize from '../Centralize'
 import Button from './Button'
 import classNames from '../../utilities/classNames'
@@ -8,11 +8,11 @@ import { themeTypes } from './propTypes'
 import { noop } from '../../utilities/other'
 import { statusTypes } from '../../constants/propTypes'
 
-export const propTypes = Object.assign({}, collapsibleTypes, {
+export const propTypes = {
   closeOnClick: PropTypes.bool,
   statusTypes,
   themeTypes,
-})
+}
 
 const defaultProps = {
   isOpen: false,

@@ -1,6 +1,13 @@
 import React from 'react'
-import { mount } from 'enzyme'
+import { mount as m } from 'enzyme'
 import Icon from '../Icon'
+
+const mount = c => {
+  const wrapper = m(c)
+  const el = wrapper.find('.c-Icon').hostNodes()
+
+  return el
+}
 
 describe('ClassName', () => {
   test('Has default className', () => {

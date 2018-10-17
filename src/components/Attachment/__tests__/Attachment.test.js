@@ -82,7 +82,7 @@ describe('Size', () => {
   test('Renders if size is provided', () => {
     const size = '5KB'
     const wrapper = mount(<Attachment size={size} />)
-    const o = wrapper.find(ui.size)
+    const o = wrapper.find(ui.size).hostNodes()
 
     expect(o.length).toBe(1)
     expect(o.text()).toBe(size)
@@ -95,7 +95,7 @@ describe('TruncateLimit', () => {
     const wrapper = mount(
       <Attachment truncateLimit={10} name="mr-mr-mr-mugatu.png" />
     )
-    const o = wrapper.find(ui.name)
+    const o = wrapper.find(ui.name).hostNodes()
     const t = o.text()
 
     expect(t).not.toBe(name)
@@ -108,7 +108,7 @@ describe('TruncateLimit', () => {
     const wrapper = mount(
       <Attachment truncateLimit={100} name="mr-mr-mr-mugatu.png" />
     )
-    const o = wrapper.find(ui.name)
+    const o = wrapper.find(ui.name).hostNodes()
     const t = o.text()
 
     expect(t).toBe(name)
@@ -133,10 +133,9 @@ describe('Theme', () => {
         <Attachment type="action" />
       </Provider>
     )
-    const o = wrapper.find(Attachment)
+    const o = wrapper.find('.c-Attachment.is-theme-default')
 
     expect(o.length).toBe(1)
-    expect(o.hasClass('is-theme-default')).toBeTruthy()
   })
 
   test('Renders theme styles, if provided', () => {
@@ -145,16 +144,15 @@ describe('Theme', () => {
         <Attachment type="action" />
       </Provider>
     )
-    const o = wrapper.find(Attachment)
+    const o = wrapper.find('.c-Attachment.is-theme-preview')
 
     expect(o.length).toBe(1)
-    expect(o.hasClass('is-theme-preview')).toBeTruthy()
   })
 })
 
 describe('Image', () => {
   test('Adds image className if image is provided', () => {
-    const wrapper = mount(<Attachment imageUrl="image.png" />)
+    const wrapper = shallow(<Attachment imageUrl="image.png" />)
 
     expect(wrapper.hasClass('has-image')).toBeTruthy()
   })
@@ -189,7 +187,7 @@ describe('Content', () => {
 describe('CloseButton', () => {
   test('Does not render by default', () => {
     const wrapper = mount(<Attachment imageUrl="image.png" />)
-    const o = wrapper.find(ui.closeButton)
+    const o = wrapper.find(ui.closeButton).hostNodes()
 
     expect(o.length).toBe(0)
   })
@@ -200,7 +198,7 @@ describe('CloseButton', () => {
         <Attachment imageUrl="image.png" />
       </Provider>
     )
-    const o = wrapper.find(ui.closeButton)
+    const o = wrapper.find(ui.closeButton).hostNodes()
 
     expect(o.length).toBe(1)
   })
@@ -212,7 +210,7 @@ describe('CloseButton', () => {
         <Attachment imageUrl="image.png" onRemoveClick={spy} id="1" />
       </Provider>
     )
-    const o = wrapper.find(ui.closeButton)
+    const o = wrapper.find(ui.closeButton).hostNodes()
 
     o.simulate('click')
 

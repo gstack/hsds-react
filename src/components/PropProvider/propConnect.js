@@ -1,10 +1,11 @@
 // @flow
 import type { PropProviderProps, ConfigGetter } from './types'
 import React, { Component } from 'react'
+import get from 'lodash.get'
 import { getComponentName, hoistNonReactStatics } from '@helpscout/react-utils'
 import Context from './Context'
 import { getConfigProps, getGlobalApp, propProviderDataAttr } from './utils'
-import { isDefined, isString } from '../../utilities/is'
+import { isDefined, isString, isObject } from '../../utilities/is'
 
 type Props = Object
 
@@ -31,12 +32,7 @@ function propConnect(name?: ConfigGetter) {
       setWrappedInstance: Function
       wrappedInstance: any = null
 
-      constructor(props, context) {
-        super(props, context)
-        this.setWrappedInstance = this.setWrappedInstance.bind(this)
-      }
-
-      setWrappedInstance(ref) {
+      setWrappedInstance = ref => {
         this.wrappedInstance = ref
       }
 
@@ -47,6 +43,7 @@ function propConnect(name?: ConfigGetter) {
           ...namespacedProps,
           ...this.props,
           [propProviderDataAttr]: getGlobalApp(contextProps),
+          ref: !isStateless(WrappedComponent) ? this.setWrappedInstance : null,
         }
       }
 
@@ -54,10 +51,7 @@ function propConnect(name?: ConfigGetter) {
         return (
           <Context.Consumer>
             {contextProps => (
-              <WrappedComponent
-                {...this.getMergedProps(contextProps)}
-                ref={this.setWrappedInstance}
-              />
+              <WrappedComponent {...this.getMergedProps(contextProps)} />
             )}
           </Context.Consumer>
         )
@@ -66,6 +60,10 @@ function propConnect(name?: ConfigGetter) {
 
     return hoistNonReactStatics(Connect, WrappedComponent)
   }
+}
+
+function isStateless(Component: any): boolean {
+  return !!(isObject(Component) && !get(Component, 'prototype.render'))
 }
 
 export default propConnect

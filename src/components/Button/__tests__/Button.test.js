@@ -177,7 +177,7 @@ describe('RouteWrapper', () => {
   test('`to` router navigation is skipped on ctrl+click', done => {
     const route = '/some/route/'
     const wrapper = wrap(<Button to={route}>Gator</Button>, options)
-    expect(wrapper.getNode().type).toBe('button')
+    expect(wrapper.instance().type).toBe('button')
     clickEvent.ctrlKey = true
     wrapper.simulate('click', clickEvent)
     expect(preventDefault).not.toHaveBeenCalled()
@@ -190,7 +190,7 @@ describe('RouteWrapper', () => {
   test('`to` router navigation is skipped on cmd+click', done => {
     const route = '/some/route/'
     const wrapper = wrap(<Button to={route}>Gator</Button>, options)
-    expect(wrapper.getNode().type).toBe('button')
+    expect(wrapper.instance().type).toBe('button')
     clickEvent.metaKey = true
     wrapper.simulate('click', clickEvent)
     expect(preventDefault).not.toHaveBeenCalled()
@@ -209,7 +209,7 @@ describe('RouteWrapper', () => {
       </Button>,
       options
     )
-    expect(wrapper.getNode().type).toBe('button')
+    expect(wrapper.instance().type).toBe('button')
     wrapper.simulate('click', clickEvent)
     expect(preventDefault).toHaveBeenCalled()
     setTimeout(() => {

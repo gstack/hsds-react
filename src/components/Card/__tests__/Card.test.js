@@ -35,7 +35,7 @@ describe('Block', () => {
     const o = wrapper.find(Card.Block)
 
     expect(o.length).toBe(1)
-    expect(o.getNode().props.children).toBe('MegaMind')
+    expect(o.instance().props.children).toBe('MegaMind')
   })
 
   test('Can render a multiple Card.Block', () => {
@@ -88,8 +88,8 @@ describe('Link', () => {
     const o = wrapper.find(Link)
 
     expect(o.length).toBe(1)
-    expect(o.getNode().props.block).toBeTruthy()
-    expect(o.getNode().props.href).toBe(link)
+    expect(o.instance().props.block).toBeTruthy()
+    expect(o.instance().props.href).toBe(link)
   })
 
   test('Renders a Link component if to is defined', () => {
@@ -101,8 +101,8 @@ describe('Link', () => {
     const o = wrapper.find(Link)
 
     expect(o.length).toBe(1)
-    expect(o.getNode().props.block).toBeTruthy()
-    expect(o.getNode().props.to).toBe(link)
+    expect(o.instance().props.block).toBeTruthy()
+    expect(o.instance().props.to).toBe(link)
   })
 
   test('Renders a Link component with target="_blank"', () => {
@@ -112,7 +112,7 @@ describe('Link', () => {
       </MemoryRouter>
     )
     const o = wrapper.find(Link)
-    const p = o.getNode().props
+    const p = o.instance().props
 
     expect(o.length).toBe(1)
     expect(p.block).toBeTruthy()
@@ -130,7 +130,7 @@ describe('Link', () => {
     const o = wrapper.find(Link)
 
     expect(o.length).toBe(1)
-    expect(o.getNode().props.children.type).toBe(Card.Block)
+    expect(o.instance().props.children.type).toBe(Card.Block)
     expect(b.length).toBe(1)
     expect(b.node.props.children).toBe('MegaMind')
   })
@@ -200,14 +200,14 @@ describe('Selector', () => {
     const wrapper = mount(<Card />)
     const o = wrapper.find('.c-Card')
 
-    expect(o.getNode().tagName).toBe('DIV')
+    expect(o.instance().tagName).toBe('DIV')
   })
 
   test('Renders a custom selector, if specified', () => {
     const wrapper = mount(<Card selector="span" />)
     const o = wrapper.find('.c-Card')
 
-    expect(o.getNode().tagName).toBe('SPAN')
+    expect(o.instance().tagName).toBe('SPAN')
   })
 })
 

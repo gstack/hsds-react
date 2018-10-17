@@ -15,7 +15,7 @@ describe('ClassName', () => {
   test('Accepts custom className', () => {
     const className = 'milk-was-a-bad-choice'
     const wrapper = mount(<Switch className={className} />)
-    const el = wrapper.find('.c-Switch').getNode()
+    const el = wrapper.find('.c-Switch').instance()
 
     expect(el.classList.contains(className)).toBe(true)
   })
@@ -339,7 +339,7 @@ describe('State', () => {
 
   test('Can render error styles', () => {
     const wrapper = mount(<Switch state="error" />)
-    const el = wrapper.find('.c-Switch').getNode()
+    const el = wrapper.find('.c-Switch').instance()
 
     expect(el.classList.contains('is-error')).toBe(true)
   })
@@ -348,7 +348,7 @@ describe('State', () => {
 describe('Styles', () => {
   test('Can render size styles, if applicable', () => {
     const wrapper = mount(<Switch size="sm" />)
-    const el = wrapper.find('.c-Switch').getNode()
+    const el = wrapper.find('.c-Switch').instance()
 
     expect(el.classList.contains('is-sm')).toBe(true)
   })

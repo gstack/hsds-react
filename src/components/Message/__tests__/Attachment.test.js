@@ -15,14 +15,14 @@ const ui = {
 describe('ClassNames', () => {
   test('Has default className', () => {
     const wrapper = mount(<Attachment />)
-    const o = wrapper.find(`.${cx}`)
+    const o = wrapper.find(`.${cx}`).hostNodes()
 
     expect(o.length).toBeTruthy()
   })
 
   test('Accepts custom classNames', () => {
     const wrapper = mount(<Attachment className="mugatu" />)
-    const o = wrapper.find(`.${cx}`)
+    const o = wrapper.find(`.${cx}`).hostNodes()
 
     expect(o.hasClass('mugatu')).toBeTruthy()
   })
@@ -35,7 +35,7 @@ describe('Context', () => {
         <Attachment />
       </Message.Provider>
     )
-    const el = wrapper.find(`.${cx}`)
+    const el = wrapper.find(`.${cx}`).hostNodes()
 
     expect(el.props().className).toContain('is-theme-embed')
   })
@@ -44,8 +44,8 @@ describe('Context', () => {
 describe('Content', () => {
   test('Renders content within Text, if url not defined', () => {
     const wrapper = mount(<Attachment filename="file.png" />)
-    const t = wrapper.find(ui.text)
-    const l = wrapper.find(ui.link)
+    const t = wrapper.find(ui.text).hostNodes()
+    const l = wrapper.find(ui.link).hostNodes()
 
     expect(t.length).toBeTruthy()
     expect(t.html()).toContain('file.png')
@@ -54,8 +54,8 @@ describe('Content', () => {
 
   test('Renders content within Link, if url is defined', () => {
     const wrapper = mount(<Attachment filename="file.png" url="url" />)
-    const t = wrapper.find(ui.text)
-    const l = wrapper.find(ui.link)
+    const t = wrapper.find(ui.text).hostNodes()
+    const l = wrapper.find(ui.link).hostNodes()
 
     expect(t.length).not.toBeTruthy()
     expect(l.length).toBeTruthy()
@@ -64,7 +64,7 @@ describe('Content', () => {
 
   test('Renders truncated text within link', () => {
     const wrapper = mount(<Attachment filename="file.png" url="url" />)
-    const t = wrapper.find(ui.linkText)
+    const t = wrapper.find(ui.linkText).hostNodes()
 
     expect(t.html()).toContain('file.png')
     expect(t.props().className).toContain('truncate')
@@ -72,15 +72,16 @@ describe('Content', () => {
 
   test('Renders text with has-noUrl styles, if url is not defined', () => {
     const wrapper = mount(<Attachment filename="file.png" />)
-    const t = wrapper.find(ui.text)
+    const o = wrapper.find(`.${cx}`).hostNodes()
+    const t = wrapper.find('.c-MessageAttachment__text.has-noUrl').hostNodes()
 
-    expect(wrapper.hasClass('has-noUrl')).toBeTruthy()
-    expect(t.hasClass('has-noUrl')).toBeTruthy()
+    expect(o.hasClass('has-noUrl')).toBeTruthy()
+    expect(t.length).toBe(1)
   })
 
   test('Renders truncated text within non-link', () => {
     const wrapper = mount(<Attachment filename="file.png" />)
-    const t = wrapper.find(ui.text)
+    const t = wrapper.find(ui.text).hostNodes()
 
     expect(t.props().className).toContain('truncate')
   })
@@ -89,7 +90,7 @@ describe('Content', () => {
 describe('Download', () => {
   test('Provides download functionality, by default', () => {
     const wrapper = mount(<Attachment filename="file.png" url="url" />)
-    const o = wrapper.find(ui.link)
+    const o = wrapper.find(ui.link).hostNodes()
 
     expect(o.prop('download')).toBeTruthy()
     expect(o.html()).toContain('download')
@@ -99,7 +100,7 @@ describe('Download', () => {
     const wrapper = mount(
       <Attachment filename="file.png" url="url" download={false} />
     )
-    const o = wrapper.find(ui.link)
+    const o = wrapper.find(ui.link).hostNodes()
 
     expect(o.prop('download')).not.toBeTruthy()
     expect(o.html()).not.toContain('download')
@@ -107,7 +108,7 @@ describe('Download', () => {
 
   test('Provides download link with title', () => {
     const wrapper = mount(<Attachment filename="file.png" url="url" />)
-    const o = wrapper.find(ui.link)
+    const o = wrapper.find(ui.link).hostNodes()
 
     expect(o.prop('title')).toBeTruthy()
     expect(o.prop('title')).toContain('file.png')
@@ -115,7 +116,7 @@ describe('Download', () => {
 
   test('Provides download link with title', () => {
     const wrapper = mount(<Attachment filename="file.png" url="url" />)
-    const o = wrapper.find(ui.link)
+    const o = wrapper.find(ui.link).hostNodes()
 
     expect(o.prop('title')).toBeTruthy()
     expect(o.prop('title')).toContain('file.png')
@@ -123,7 +124,7 @@ describe('Download', () => {
 
   test('Links should open in new tab, by default', () => {
     const wrapper = mount(<Attachment filename="file.png" url="url" />)
-    const o = wrapper.find(ui.link)
+    const o = wrapper.find(ui.link).hostNodes()
 
     expect(o.prop('target')).toBe('_blank')
   })
@@ -132,7 +133,7 @@ describe('Download', () => {
     const wrapper = mount(
       <Attachment filename="file.png" url="url" openDownloadInNewTab={false} />
     )
-    const o = wrapper.find(ui.link)
+    const o = wrapper.find(ui.link).hostNodes()
 
     expect(o.prop('target')).not.toBe('_blank')
   })
@@ -144,7 +145,7 @@ describe('onClick', () => {
     const wrapper = mount(
       <Attachment filename="file.png" url="url" onClick={spy} />
     )
-    const o = wrapper.find(ui.link)
+    const o = wrapper.find(ui.link).hostNodes()
     o.simulate('click')
 
     expect(spy).toHaveBeenCalled()
@@ -153,7 +154,7 @@ describe('onClick', () => {
   test('Callback is not passed to text (non-link)', () => {
     const spy = jest.fn()
     const wrapper = mount(<Attachment filename="file.png" onClick={spy} />)
-    const o = wrapper.find(ui.text)
+    const o = wrapper.find(ui.text).hostNodes()
     o.simulate('click')
 
     expect(spy).not.toHaveBeenCalled()

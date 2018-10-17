@@ -331,7 +331,7 @@ describe('Selected', () => {
 describe('Height', () => {
   test('Keeps height at null if Menu is within viewport', () => {
     const wrapper = mount(<MenuComponent isOpen />)
-    const o = wrapper.getNode()
+    const o = wrapper.instance()
 
     o.listNode.getBoundingClientRect = () => ({
       width: 200,
@@ -472,7 +472,7 @@ describe('Keyboard Arrows: Up/Down', () => {
         <Item />
       </MenuComponent>
     )
-    wrapper.getNode().isFocused = false
+    wrapper.instance().isFocused = false
 
     simulateKeyPress(Keys.UP_ARROW, 'keydown')
     expect(wrapper.state().focusIndex).toBe(3)
@@ -487,7 +487,7 @@ describe('Keyboard Arrows: Up/Down', () => {
         <Item />
       </MenuComponent>
     )
-    wrapper.getNode().isFocused = false
+    wrapper.instance().isFocused = false
 
     simulateKeyPress(Keys.DOWN_ARROW, 'keydown')
     expect(wrapper.state().focusIndex).toBe(3)
@@ -542,7 +542,7 @@ describe('Keyboard Arrows: Left/Right', () => {
         <Item />
       </MenuComponent>
     )
-    wrapper.getNode().isFocused = false
+    wrapper.instance().isFocused = false
 
     simulateKeyPress(Keys.LEFT_ARROW, 'keydown')
 
@@ -562,7 +562,7 @@ describe('Keyboard Arrows: Left/Right', () => {
         <Item />
       </MenuComponent>
     )
-    const o = wrapper.getNode()
+    const o = wrapper.instance()
     const previousHoverIndex = wrapper.state().hoverIndex
 
     simulateKeyPress(Keys.RIGHT_ARROW, 'keydown')
@@ -582,7 +582,7 @@ describe('Keyboard Arrows: Left/Right', () => {
         <Item />
       </MenuComponent>
     )
-    const o = wrapper.getNode()
+    const o = wrapper.instance()
 
     expect(o.isFocused).toBeTruthy()
 
@@ -602,7 +602,7 @@ describe('Keyboard Arrows: Left/Right', () => {
         <Item />
       </MenuComponent>
     )
-    const o = wrapper.getNode()
+    const o = wrapper.instance()
 
     expect(o.isFocused).toBeTruthy()
 
@@ -625,7 +625,7 @@ describe('Keyboard Arrows: Left/Right', () => {
         <Item />
       </MenuComponent>
     )
-    wrapper.getNode().isFocused = false
+    wrapper.instance().isFocused = false
 
     simulateKeyPress(Keys.LEFT_ARROW, 'keydown')
 
@@ -640,7 +640,7 @@ describe('Open state', () => {
         <Item />
       </MenuComponent>
     )
-    const o = wrapper.getNode()
+    const o = wrapper.instance()
     wrapper.setProps({ isOpen: true })
 
     expect(o.isFocused).toBe(true)
@@ -681,7 +681,7 @@ describe('Focus', () => {
     simulateKeyPress(Keys.DOWN_ARROW, 'keydown')
 
     expect(wrapper.state().focusIndex).toBe(3)
-    expect(wrapper.getNode().items[3].node).toBe(document.activeElement)
+    expect(wrapper.instance().items[3].node).toBe(document.activeElement)
   })
 
   test('Does not focuses item on key down arrow, if menu is unfocused', () => {
@@ -693,14 +693,14 @@ describe('Focus', () => {
         <Item />
       </MenuComponent>
     )
-    const o = wrapper.getNode()
+    const o = wrapper.instance()
     o.isFocused = false
 
     simulateKeyPress(Keys.DOWN_ARROW, 'keydown')
     simulateKeyPress(Keys.DOWN_ARROW, 'keydown')
     simulateKeyPress(Keys.DOWN_ARROW, 'keydown')
 
-    expect(wrapper.getNode().items[3].node).not.toBe(document.activeElement)
+    expect(wrapper.instance().items[3].node).not.toBe(document.activeElement)
   })
 
   test('Removes this.isFocused when item with sub-menu is hovered', () => {
@@ -716,7 +716,7 @@ describe('Focus', () => {
       </MenuComponent>
     )
 
-    expect(wrapper.getNode().isFocused).toBeTruthy()
+    expect(wrapper.instance().isFocused).toBeTruthy()
     expect(wrapper.state().focusIndex).not.toBe(3)
     expect(wrapper.state().hoverIndex).not.toBe(3)
 
@@ -728,7 +728,7 @@ describe('Focus', () => {
 
     expect(wrapper.state().focusIndex).toBe(3)
     expect(wrapper.state().hoverIndex).toBe(3)
-    expect(wrapper.getNode().isFocused).not.toBeTruthy()
+    expect(wrapper.instance().isFocused).not.toBeTruthy()
   })
 
   test('Resets focus when sub-menu is closed, and if menu is mounted', () => {
@@ -783,9 +783,9 @@ describe('Unmounting', () => {
       </MenuComponent>
     )
 
-    expect(wrapper.getNode()._isMounted).not.toBeFalsy()
+    expect(wrapper.instance()._isMounted).not.toBeFalsy()
     wrapper.unmount()
-    expect(wrapper.getNode()._isMounted).toBeFalsy()
+    expect(wrapper.instance()._isMounted).toBeFalsy()
   })
 })
 

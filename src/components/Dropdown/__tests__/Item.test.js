@@ -66,7 +66,7 @@ describe('Sub menu', () => {
         <Menu />
       </Item>
     )
-    const o = wrapper.getNode()
+    const o = wrapper.instance()
 
     expect(o.menu).toBeTruthy()
   })

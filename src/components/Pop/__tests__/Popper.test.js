@@ -31,11 +31,11 @@ describe('Popper', () => {
     test('Nullifies Portal on unmount', () => {
       const wrapper = mount(<Popper />)
 
-      expect(wrapper.getNode().portal).toBeTruthy()
+      expect(wrapper.instance().portal).toBeTruthy()
 
       wrapper.unmount()
 
-      expect(wrapper.getNode().portal).not.toBeTruthy()
+      expect(wrapper.instance().portal).not.toBeTruthy()
     })
   })
 

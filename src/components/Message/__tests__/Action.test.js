@@ -44,7 +44,7 @@ describe('ChatBlock', () => {
 
   test('Passes correct props to ChatBlock', () => {
     const wrapper = mount(<Action from to read ltr rtl timestamp="time" />)
-    const props = wrapper.find(ChatBlock).getNode().props
+    const props = wrapper.find(ChatBlock).instance().props
 
     expect(props.from).toBeTruthy()
     expect(props.to).toBeTruthy()
@@ -61,7 +61,7 @@ describe('Content', () => {
     const o = wrapper.find(Text)
 
     expect(o.length).toBeTruthy()
-    expect(o.getNode().props.children).toBe('Relax')
+    expect(o.instance().props.children).toBe('Relax')
   })
 })
 

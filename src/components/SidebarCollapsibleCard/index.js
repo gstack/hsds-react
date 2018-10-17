@@ -1,9 +1,6 @@
 import React, { PureComponent as Component } from 'react'
 import PropTypes from 'prop-types'
-import {
-  default as Collapsible,
-  propTypes as collapsibleTypes,
-} from '../Collapsible'
+import Collapsible from '../Collapsible'
 import EventListener from '../EventListener'
 import Flexy from '../Flexy'
 import Heading from '../Heading'
@@ -13,14 +10,14 @@ import { createUniqueIDFactory } from '../../utilities/id'
 import { noop } from '../../utilities/other'
 import classNames from '../../utilities/classNames'
 
-export const propTypes = Object.assign({}, collapsibleTypes, {
+export const propTypes = {
   header: PropTypes.element,
   title: PropTypes.string,
   isOpen: PropTypes.bool,
   sortable: PropTypes.bool,
   onSortStart: PropTypes.func,
   onSortEnd: PropTypes.func,
-})
+}
 
 export const defaultProps = {
   duration: 200,

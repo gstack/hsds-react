@@ -76,7 +76,7 @@ describe('Scrollable', () => {
     const wrapper = mount(<CardBlock scrollable onScroll={spy} />)
     const o = wrapper.find(Scrollable)
 
-    o.getNode().props.onScroll()
+    o.instance().props.onScroll()
 
     expect(spy).toHaveBeenCalled()
   })

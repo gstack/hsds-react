@@ -1,5 +1,5 @@
 import React from 'react'
-import { mount, shallow } from 'enzyme'
+import { mount as m, shallow } from 'enzyme'
 
 const baseComponentOptions = {
   className: '',
@@ -10,12 +10,18 @@ export const baseComponentTest = (
   Component,
   options = baseComponentOptions
 ) => {
+  const mount = c => {
+    const wrapper = m(c)
+    const el = wrapper.find(`.${options.className}`).hostNodes()
+
+    return el
+  }
+
   describe('ClassName', () => {
     test('Has default className', () => {
       const wrapper = mount(<Component />)
 
       expect(wrapper.hasClass(options.className)).toBeTruthy()
-      wrapper.unmount()
     })
 
     test('Applies custom className if specified', () => {
@@ -23,7 +29,6 @@ export const baseComponentTest = (
       const wrapper = mount(<Component className={customClass} />)
 
       expect(wrapper.hasClass(customClass)).toBeTruthy()
-      wrapper.unmount()
     })
   })
 
