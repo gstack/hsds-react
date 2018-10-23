@@ -16,6 +16,7 @@ import {
 import { MemoryRouter } from 'react-router'
 import { Route } from 'react-router-dom'
 import { createSpec, faker } from '@helpscout/helix'
+import { action } from '@storybook/addon-actions'
 
 const stories = storiesOf('Modal', module)
 
@@ -426,6 +427,74 @@ stories.add('tabbing', () => (
     </Modal.Content>
   </Modal>
 ))
+
+class ShouldStopPropagationExample extends React.Component {
+  state = {
+    showModal: true,
+    lastClick: '',
+    shouldStopPropagation: true,
+  }
+
+  constructor(props) {
+    super(props)
+    this.bodyClick = this.bodyClick.bind(this)
+  }
+
+  componentWillMount() {
+    document.addEventListener('click', this.bodyClick)
+  }
+
+  componentWillUnmount() {
+    document.removeEventListener('click', this.bodyClick)
+  }
+
+  backdropClick = () => {
+    this.setState({ lastClick: 'Backdrop click' })
+  }
+
+  bodyClick() {
+    action('body was clicked')
+    this.setState({ lastClick: 'Body was click' })
+  }
+
+  toggleProp = () => {
+    this.setState({ shouldStopPropagation: !this.state.shouldStopPropagation })
+  }
+
+  render() {
+    const { shouldStopPropagation, showModal, lastClick } = this.state
+    return (
+      <div>
+        <p>{lastClick}</p>
+        <p>
+          <button onClick={this.toggleProp}>
+            Should stop propagation:{' '}
+            {shouldStopPropagation === true ? 'true' : 'false'}
+          </button>
+        </p>
+        <Modal
+          trigger={<Button>Clicky</Button>}
+          isOpen={showModal}
+          overlayShouldStopPropagation={shouldStopPropagation}
+        >
+          <Modal.Content>
+            <Modal.Body>
+              <Heading>Title</Heading>
+              <button>One</button>
+              {ContentSpec.generate(6).map(({ id, content }) => (
+                <p key={id}>{content}</p>
+              ))}
+              <button>Two</button>
+              <button>Three</button>
+            </Modal.Body>
+          </Modal.Content>
+        </Modal>
+      </div>
+    )
+  }
+}
+
+stories.add('should Stop Propagation', () => <ShouldStopPropagationExample />)
 
 class HSAppExample extends React.Component {
   state = {

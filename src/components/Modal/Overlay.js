@@ -17,6 +17,7 @@ type Props = {
   overlayAnimationDuration: number,
   overlayAnimationEasing: string,
   overlayAnimationSequence: any,
+  overlayShouldStopPropagation: boolean,
 }
 
 class Overlay extends Component<Props> {
@@ -27,13 +28,24 @@ class Overlay extends Component<Props> {
     overlayAnimationDuration: 200,
     overlayAnimationEasing: 'ease',
     overlayAnimationSequence: 'fade',
+    overlayShouldStopPropagation: false,
+  }
+
+  handleOnClick = e => {
+    const { overlayShouldStopPropagation, onClick } = this.props
+    if (overlayShouldStopPropagation) {
+      e.stopPropagation()
+      e.nativeEvent.stopImmediatePropagation()
+    }
+    if (onClick) {
+      onClick(e)
+    }
   }
 
   render() {
     const {
       className,
       children,
-      onClick,
       isOpen,
       overlayAnimationDelay,
       overlayAnimationDuration,
@@ -57,7 +69,7 @@ class Overlay extends Component<Props> {
         <BaseOverlay
           {...getValidProps(rest)}
           className={componentClassName}
-          onClick={onClick}
+          onClick={this.handleOnClick}
           role="presentation"
         />
       </Animate>
